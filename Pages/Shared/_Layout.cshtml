@@ -1,0 +1,187 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - termProject_201811010</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/termProject_201811010.styles.css" asp-append-version="true" />
+
+
+
+    @*<link href="~/css/owl.carousel.min.css" rel="stylesheet" />
+        <link href="~/css/style.css" rel="stylesheet" />*@
+
+
+
+
+    <style>
+        * {
+            /*transition: all linear 0.5s;*/
+        }
+
+        .newNavbar {
+            background: white;
+            box-shadow: 4px 10px 5px 0px rgba(0, 0, 0, 0.5);
+            letter-spacing: 0.1rem;
+            border-radius: 0.25rem;
+        }
+
+       
+
+        .brand {
+            font-family: 'Grape Nuts', cursive;
+            font-weight: bold;
+            color: black;
+            line-height: 1.4;
+            text-decoration: none;
+            font-size: 20px;
+            margin-right: 15px;
+        }
+        /*.nav-item a{
+
+        }*/
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="newNavbar navbar navbar-expand-sm navbar-toggleable-sm navbar-light border-bottom  mb-3">
+            <div class="container">
+
+                @if (SignInManager.IsSignedIn(User))
+            {
+                <a class="brand" asp-area="" asp-page="/Post/Index">Canbookram</a>
+            }
+            else
+            {
+                    <a class="brand" asp-area="" asp-page="/Index">Canbookram</a>
+            }
+                   
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                        @*<li class="nav-item">
+                    <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
+                </li>*@
+
+                        @if (SignInManager.IsSignedIn(User))
+                        {
+                            // sadece kayıutlı kullanıcıların ulaşmasını istediğin menüleri buraya ekle
+                            <li class="nav-item">
+                                <a class="nav-link post text-dark " asp-area="" asp-page="/Post/Index">Post</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link post text-dark " asp-area="" asp-page="/chat/Index">Chat</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link post text-dark " asp-area="" asp-page="/user/ListMessages">Messages</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link post text-dark " asp-area="" asp-page="/user/Index">Users</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link post text-dark " asp-area="" asp-page="/user/ListRequest">Request</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link post text-dark " asp-area="" asp-page="/user/ListFriends">Friends</a>
+                            </li>
+                        }
+
+                    </ul>
+                    <partial name="_LoginPartial" />
+                </div>
+            </div>
+        </nav>
+    </header>
+    @*<header role="banner">
+            <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+                <div class="container">
+                    <a class="navbar-brand" href="index.html">Brand</a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample05" aria-controls="navbarsExample05" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+
+                    <div class="collapse navbar-collapse" id="navbarsExample05">
+                        <ul class="navbar-nav ml-auto pl-lg-5 pl-0">
+                            <li class="nav-item">
+                                <a class="nav-link active" href="index.html">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Recipes</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Services</a>
+                                <div class="dropdown-menu" aria-labelledby="dropdown04">
+                                    <a class="dropdown-item" href="#">Food Catering</a>
+                                    <a class="dropdown-item" href="#">Drink &amp; Beverages</a>
+                                    <a class="dropdown-item" href="#">Wedding &amp; Birthday</a>
+                                </div>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">About</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">News</a>
+                            </li>
+                        </ul>
+
+                        <ul class="navbar-nav ml-auto">
+                            <li class="nav-item cta-btn">
+                                <a class="nav-link" href="#">Contact Us</a>
+                            </li>
+                        </ul>
+
+                    </div>
+                </div>
+            </nav>
+        </header>*@
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    @* <footer class="border-top footer text-muted">
+            <div class="container">
+                &copy; 2022 - termProject_201811010 - <a asp-area="" asp-page="/Privacy">Privacy</a>
+            </div>
+        </footer>*@
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+
+
+
+
+    <!-- Jquery JS-->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <!-- Vendor JS-->
+    <script src="vendor/select2/select2.min.js"></script>
+    <script src="vendor/datepicker/moment.min.js"></script>
+    <script src="vendor/datepicker/daterangepicker.js"></script>
+
+
+
+    <script src="~/js/main.js"></script>
+    <script src="~/js/owl.carousel.min.js"></script>
+
+    <script src="~/js/global.js" />
+
+
+    <!-- Main JS-->
+    <script src="js/global.js"></script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

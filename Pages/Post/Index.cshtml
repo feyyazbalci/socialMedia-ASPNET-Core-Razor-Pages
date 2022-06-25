@@ -1,0 +1,178 @@
+﻿@page
+@model termProject_201811010.Pages.Post.IndexModel
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+
+@{
+    ViewData["Title"] = "Index";
+    var user = UserManager.GetUserAsync(User);
+    
+}
+<style>
+    main {
+        max-width: 800px;
+        margin: 20px auto;
+    }
+
+    .title {
+        color: white;
+        margin: 0 auto;
+        text-align: center;
+        margin-bottom: 3rem;
+    }
+
+    .underline {
+        width: 6rem;
+        height: 0.25rem;
+        background: #f04ff0;
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 15px;
+    }
+
+
+
+
+    .single {
+        background: white;
+        border-radius: 0.2rem;
+        margin: 2rem 0;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s linear;
+    }
+
+        .single:hover {
+            box-shadow: 0 15px 25px rgba(10, 10, 10, 0.2);
+        }
+        .single:hover img{
+            transform: scale(0.9);
+        }
+
+        .single img {
+            width: 100%;
+            height: 20rem;
+            object-fit: cover;
+            border-top-right-radius: 0.25rem;
+            border-top-left-radius: 0.25rem;
+            transition: transform .2s
+        }
+
+    footer {
+        padding: 1.5rem 2rem;
+    }
+
+    .button2 {
+        margin: 0 auto;
+        align-items: center;
+        background-image: linear-gradient(144deg,#ea54f0, #2feefa 50%,#00DDEB);
+        border: 0;
+        border-radius: 8px;
+        box-shadow: rgba(151, 65, 252, 0.2) 0 15px 30px -5px;
+        box-sizing: border-box;
+        color: #FFFFFF;
+        display: flex;
+        font-family: Phantomsans, sans-serif;
+        font-size: 20px;
+        justify-content: center;
+        line-height: 1em;
+        max-width: 100%;
+        min-width: 140px;
+        padding: 10px 15px;
+        text-decoration: none;
+        user-select: none;
+        -webkit-user-select: none;
+        touch-action: manipulation;
+        white-space: nowrap;
+        cursor: pointer;
+    }
+
+
+    a {
+        text-decoration: none;
+    }
+
+    .actions {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .tour-info {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1.5rem;
+    }
+</style>
+
+
+
+
+<main>
+    <div class="title">
+        <h1>Feeds</h1>
+        <div class="underline"></div>
+        <p>
+            <button class="button2"><a asp-page="Create">Create New Post</a></button>
+
+        </p>
+    </div>
+    @if (Model.UserPost != null)
+    {
+        @foreach (var item in Model.UserPost)
+        {
+            var sender = Model.userProfiles.FirstOrDefault(f => f.UserId == item.UserId);
+            <article class="single">
+                @if (item.Picture != null)
+                {
+                    <img src="data:image;base64,@System.Convert.ToBase64String(item.Picture)" />
+                }
+                else
+                {
+                    <div></div>
+                }
+                <footer>
+                    <div class="tour-info">
+                        <h2>@sender.FirstName</h2>
+                        <span>
+                            @Html.DisplayFor(modelItem => item.Timestamp)
+
+                        </span>
+                    </div>
+                    <p>
+                        @Html.DisplayFor(modelItem => item.Message)
+
+                    </p>
+                    <div class="actions">
+                        <form asp-page-handler="CalculateLikes" asp-route-id="@item.Id" method="post">
+                            <button class="button2">Like @item.Likes</button>
+                        </form>
+
+                        <button class="button2"><a asp-page="./Details" asp-route-id="@item.Id">Details</a> </button>
+                        <form asp-page-handler="CalculateDislikes" asp-route-id="@item.Id" method="post">
+                            <button class="button2">Dislike @item.Dislikes</button>
+                        </form>
+
+                    </div>
+                </footer>
+            </article>
+
+        }
+    }
+    else
+    {
+        <tr>
+            <td>No posts!</td>
+        </tr>
+    }
+
+
+
+
+
+</main>
+
+
+
+

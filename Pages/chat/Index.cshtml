@@ -1,0 +1,95 @@
+﻿@page
+@model termProject_201811010.Pages.chat.IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+<style>
+    .mainContainer {
+        max-width: 500px;
+        margin-top: 80px;
+    }
+</style>
+<div class="container mainContainer">
+    <form>
+        <div class="form-group">
+            <label for="message" >Message</label>
+            <input class="form-control" id="message" placeholder="Hello..">
+
+        </div>
+        <div class="form-group">
+            <label for="exampleFormControlInput1">Receiver</label>
+            <div>@Html.DropDownList("receiver", Model.Users, "All")</div>
+
+        </div>
+        <div class="d-grid my-3">
+            <input class=btn btn-outline-success" type="button" id="sendMessage" value="Send Message" />
+        </div>
+        
+    </form>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+        @*<div class="row justify-content-md-center">
+            <div class="col-sm my-2">
+                <label for="message" class="col-sm-2 col-form-label">Message</label>
+
+                <input class="form-control" id="message" placeholder="Hello..">
+
+            </div>
+        </div>
+        <div class="row justify-content-md-center">
+            <div class="col-sm my-3 ">
+                <label for="exampleFormControlInput1" class="col-sm-2  form-label">Receiver</label>
+                <btn class="btn"> <div>@Html.DropDownList("receiver", Model.Users, "All")</div></btn>
+            </div>
+        </div>
+        <div class="row d-block">
+            <div class="col-sm my-3 d-block">
+
+                <input class="btn btn-primary d-block" type="button" id="sendMessage" value="Send Message" />
+
+            </div>
+        </div>*@
+
+
+
+
+
+
+
+
+    @*<div class="mb-3 row">
+
+        </div>
+        <div class="mb-3">
+            <div class="mb-3 row">
+                <label for="exampleFormControlInput1" class="col-sm-2  form-label">Receiver</label>
+                <div class="col-sm-10">
+                    <div class="btn2">@Html.DropDownList("receiver", Model.Users, "All")</div>
+                </div>
+            </div>
+            <div class="justify-content-center">
+                <input class="btn btn-primary " type="button" id="sendMessage" value="Send Message" />
+            </div>
+        </div>*@
+
+
+
+
+
+    @Html.Hidden("sender", Model.MyUser) <!--Current logged in username-->
+
+    @section Scripts
+{
+        <script src="~/js/microsoft/signalr/dist/browser/signalr.js"></script>
+        <script src="~/js/chat.js" asp-append-version="true"></script>
+    }

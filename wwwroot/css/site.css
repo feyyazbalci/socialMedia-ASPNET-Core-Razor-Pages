@@ -1,0 +1,25 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Grape+Nuts&display=swap');
+
+
+
+html {
+    font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+    margin-bottom: 60px;
+    background: rgb(29,253,251);
+    background: linear-gradient(83deg, rgba(29,253,251,1) 0%, rgba(252,69,239,1) 100%);
+}

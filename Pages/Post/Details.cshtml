@@ -1,0 +1,154 @@
+﻿@page
+@model termProject_201811010.Pages.Post.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+@*<h1>Details</h1>
+
+    <hr />
+ *@
+<style>
+    .main2 {
+        margin: 0 auto;
+        display: flex;
+        text-align: center;
+        justify-content: center;
+    }
+    .menu {
+        display: grid;
+        grid-template-columns: 225px 1fr;
+        grid-gap: 0 1.25rem;
+        gap: 0 1.25rem;
+        max-width: 50rem;
+        background: white;
+        padding: 10px 15px;
+        border-radius: 0.4rem;
+    }
+    .photo {
+        object-fit: cover;
+        height: 150px;
+        width: 100%;
+        border: 0.25rem solid #c59d5f;
+        border: 0.25rem solid black;
+        border-radius: 0.25rem;
+        display: block;
+    }
+    .header2 {
+        display: flex;
+        justify-content: space-between;
+        border-bottom: 0.5px dotted #617d98;
+        border-bottom: 0.5px dotted double;
+    }
+    .item-text {
+        margin-bottom: 0;
+        padding-top: 1rem;
+    }
+    h4{
+        font-size: 15px;
+    }
+    a {
+        text-decoration: none;
+    }
+    .actions{
+        margin-top: 10px;
+    }
+    .btn2 {
+        background: linear-gradient(144deg,#111a7a, #d055df 50%,#00DDEB);
+        border-color: transparent;
+        font-size: 1rem;
+        text-transform: capitalize;
+        margin: 0 0.5rem;
+        letter-spacing: 1px;
+        padding: 0.375rem 0.75rem;
+        color: white;
+        cursor: pointer;
+        font-weight: 600;
+        border-radius: 0.4rem;
+        color: white;
+        transition: all linear 0.7s;
+    }
+
+        .btn2:hover {
+            background: linear-gradient(144deg,#828f83, #bed7c3 50%,#086a70);
+            color: white;
+        }
+        
+}
+
+
+
+
+</style>
+
+
+
+<main class="main2">
+    <article class="menu">
+        <img class="photo" src="data:image;base64,@System.Convert.ToBase64String(Model.UserPost.Picture)" width="80" height="80">
+        <div class="item-info">
+            <header class="header2">
+                <h4>UserName</h4>
+                <h4>@Html.DisplayFor(model => model.UserPost.Timestamp)</h4>
+
+            </header>
+            <p class="item-text">
+                @Html.DisplayFor(model => model.UserPost.Message)
+            </p>
+            <div class="actions">
+                <button class="btn2">
+                    <a asp-page="./Edit" asp-route-id="@Model.UserPost?.Id">Edit</a>
+                </button>
+                <button class="btn2">
+                    <a asp-page="./Delete"  asp-route-id="@Model.UserPost?.Id">Delete</a>
+                </button>
+
+                <button class="btn2">
+                    <a asp-page="./Index">Back to List</a>
+                </button>
+
+
+            </div>
+        </div>
+    </article>
+
+
+</main>
+
+
+@*<div>
+
+    
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.UserPost.Message)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.UserPost.Message)
+        </dd>
+
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.UserPost.Timestamp)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.UserPost.Timestamp)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.UserPost.Picture)
+        </dt>
+        <dd class="col-sm-10">
+            <figure>
+                <img src="data:image;base64,@System.Convert.ToBase64String(Model.UserPost.Picture)" width="80" height="80">
+            </figure>
+        </dd>
+    </dl>
+
+</div>*@
+
+
+@*<div>
+    <a asp-page="./Edit" asp-route-id="@Model.UserPost?.Id">Edit</a> |
+    <a asp-page="./Index">Back to List</a>
+</div>*@

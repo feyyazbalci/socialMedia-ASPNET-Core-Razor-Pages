@@ -1,0 +1,59 @@
+﻿@page
+@model termProject_201811010.Pages.User.IndexModel
+@using System.Security.Claims
+@{
+}
+<style>
+    .userCard{
+        transition: all linear 0.3s;
+    }
+    .userCard:hover {
+        box-shadow:  0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+    .cardImage{
+        width: 100%;
+        height: 100px;
+        object-fit: cover
+    }
+</style>
+
+
+@**@
+
+<div class="container">
+    <h1 class="my-3 text-white-50 text-center">All Users</h1>
+    <form class="d-flex" role="search">
+        <input class="form-control me-2" type="search" placeholder="Find Users" autocomplete="off" aria-label="Search" asp-for="SearchString">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+    </form>
+    <div class="row ">
+        @foreach (var item in Model.userProfiles)
+        {
+            if (item.UserId != User.FindFirstValue(ClaimTypes.NameIdentifier))
+            {
+                <div class="col my-3">
+
+                    <div class="card userCard" style="width: 18rem;">
+                        <img class="card-img-top cardImage" src="data:image;base64,@System.Convert.ToBase64String(@item.Picture)" />
+
+                        <div class="card-body">
+                            <h5 class="card-title">@item.FirstName @item.LastName</h5>
+                            <p class="card-text"></p>
+                            <form asp-page-handler="FriendRequest" asp-route-id="@item.UserId" method="post">
+                                <button class="btn-sm btn-primary justify-content-center">add friend</button>
+                            </form>
+
+                        </div>
+                    </div>
+
+                </div>
+            }
+
+        }
+
+
+    </div>
+</div>
+
+
+

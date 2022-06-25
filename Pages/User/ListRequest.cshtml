@@ -1,0 +1,59 @@
+﻿@page
+@model termProject_201811010.Pages.User.FriendRequestModel
+
+@using System.Security.Claims
+@{
+
+}
+<style>
+    
+    .actions {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+    }
+</style>
+
+@if (Model.friendships.Count > 0)
+{
+
+
+<div class="container">
+    <div class="row justify-content-center">
+        <h1 class="text-center mt-3">You have some friend request..</h1>
+        <div class="col-6 ">
+            @foreach (var item in Model.friendships)
+            {
+                var sender = Model.users.FirstOrDefault(f => f.UserId == item.SenderId);
+                <div class="row bg-light my-3 p-3 d-flex align-items-center rounded-2">
+
+                    <div class="col-4">
+                        <p>@sender.FirstName</p>
+                    </div>
+                    <div class="col-8 actions">
+                        <form asp-page-handler="AcceptFriend" asp-route-accept="@true" asp-route-FriendshipId="@item.Id" method="post">
+                            <button class="btn btn-success">Accept</button>
+                        </form>
+                        <form asp-page-handler="AcceptFriend" asp-route-accept="@false" asp-route-FriendshipId="@item.Id" method="post">
+                            <button class="btn btn-danger">Reject</button>
+                        </form>
+                    </div>
+
+
+
+
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+
+    
+}
+else
+{
+   <h1 class="text-center mt-3">You don't have any friend request..</h1>
+}
+
+

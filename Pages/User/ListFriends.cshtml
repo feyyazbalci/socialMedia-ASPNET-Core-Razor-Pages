@@ -1,0 +1,141 @@
+﻿@page
+@model termProject_201811010.Pages.User.ListFriendsModel
+@{
+
+}
+<style>
+    .senderImg {
+        width: 100%;
+        filter: blur(1px) grayscale(100%);
+        transition: all linear 0.3s;
+        object-fit: cover;
+        border-radius: 0.3rem;
+    }
+    
+    .friendCard{
+        background: #d9e3f1;
+        border: 2px solid white;
+        padding: 10px 15px;
+        margin: 10px 0;
+    }
+     .friendCard:hover img {
+            filter: grayscale(0%) blur(0px);
+        }
+    .actions{
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+    }
+    .firstPart{
+        margin: 35px 0;
+    }
+    .action-btn{
+        background: #000000;
+        cursor: pointer;
+        transition: all  linear 0.3s;
+    }
+</style>
+
+<h1 class="text-center">Your Friends</h1>
+
+<div class="container">
+    <div class="row justify-content-center">
+        @foreach (var item in Model.friendsList)
+        {
+            var sender = Model.users.FirstOrDefault(f => f.UserId == item.SenderId);
+        <div class="col-8 friendCard">
+            <div class="row">
+                <div class="col-8 col-sm-6 firstPart">
+                    <div class="actions my-3">
+                        <p class="text-dark ">Name :</p>
+                        <p class="text-dark">@sender.FirstName</p>
+                    </div>
+                    <div class="actions my-3">
+                        <p class="text-dark ">City :</p>
+                        @if (sender.City != null)
+                        {
+                            <p class="text-dark">
+                                @sender.City
+                            </p>
+                        }
+                        else
+                        {
+                            <p class="text-dark">
+                                Ankara
+                            </p>
+                        }
+                        
+                    </div>
+                    <div class="actions my-3">
+                        <p class="text-dark ">Birty :</p>
+                        @if (sender.City != null)
+                        {
+                            <p class="text-dark">@sender.BirthDate.Value.ToShortDateString()</p>
+                        }
+                        else{
+                            <p class="text-dark">17.11.1999</p>
+                        }
+
+
+                    </div>
+                    <form class="d-grid" method="Post" asp-page-handler="DeleteFriend" asp-route-deleteId="@sender.UserId">
+                        <button class="btn action-btn">Delete</button>
+                    </form>
+
+                </div>
+                <div class="col-4 col-sm-6">
+                    <img class="senderImg" src="data:image;base64,@System.Convert.ToBase64String(sender.Picture)" />
+                </div>
+                
+            </div>
+           
+            @*<div class="col-auto">
+            <div class="actions my-3">
+                <p class="text-dark ">@sender.FirstName <span>@sender.LastName</span> </p>
+
+                <form method="Post" asp-page-handler="DeleteFriend" asp-route-deleteId="@sender.UserId">
+                    <button class="btn action-btn">Delete</button>
+                </form>
+            </div>
+        </div>*@
+
+        </div>
+        
+            
+            
+        }
+
+    </div>
+</div>
+
+
+
+@*<div class="container ">
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Surname</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                @foreach (var item in Model.friendsList)
+                {
+                    var sender = Model.users.FirstOrDefault(f => f.UserId == item.SenderId);
+                    <td>@sender.FirstName</td>
+                    <td>@sender.LastName</td>
+                    <td>
+                        <form method="Post" asp-page-handler="DeleteFriend" asp-route-deleteId="@sender.UserId">
+                            <button class="btn btn-danger">Delete</button>
+                        </form>
+                    </td>
+
+                }
+
+            </tr>
+
+        </tbody>
+    </table>
+</div>*@
